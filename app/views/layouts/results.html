@@ -13,25 +13,27 @@
 {% set cardSupertitles = cardSupertitles or [] %}
 
 {% block beforeContent %}
-<div class="tna-container">
-  {{ tnaBreadcrumbs({
-    items: [
-      {
-        text: 'Home',
-        href: 'https://www.nationalarchives.gov.uk'
-      },
-      {
-        text: 'Education',
-        href: '/'
-      }
-    ],
-    classes: 'tna-column tna-column--full tna-!--padding-vertical-s'
-  }) }}
+<div class="tna-background-accent-light">
+  <div class="tna-container">
+    {{ tnaBreadcrumbs({
+      items: [
+        {
+          text: 'Home',
+          href: 'https://www.nationalarchives.gov.uk'
+        },
+        {
+          text: 'Education',
+          href: '/'
+        }
+      ],
+      classes: 'tna-column tna-column--full tna-!--padding-vertical-s'
+    }) }}
+  </div>
 </div>
 {% endblock beforeContent %}
 
 {% block content %}
-<div class="tna-background-accent tna-!--padding-top-l">
+<div class="tna-background-accent-light tna-!--padding-top-l">
   <div class="tna-container">
     <div class="tna-column tna-column--width-2-3 tna-column--width-5-6-medium tna-column--full-small tna-column--full-tiny">
       <hgroup class="tna-hgroup-xl">
@@ -60,7 +62,7 @@
           }
         ],
         noBottomBorder: true,
-        classes: "tna-!--margin-top-m"
+        classes: "tna-!--margin-top-l"
       }) }}
     </div>
   </div>
