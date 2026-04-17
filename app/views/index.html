@@ -4,6 +4,7 @@
 {%- from "nationalarchives/components/card/macro.njk" import tnaCard -%}
 {%- from "nationalarchives/components/checkboxes/macro.njk" import tnaCheckboxes -%}
 {%- from "nationalarchives/components/hero/macro.njk" import tnaHero -%}
+{%- from "nationalarchives/components/radios/macro.njk" import tnaRadios -%}
 {%- from "nationalarchives/components/search-field/macro.njk" import tnaSearchField -%}
 
 {% set pageTitle = 'Landing page' %}
@@ -54,6 +55,25 @@
           name: "q"
         }) }}
         <!--
+        {{ tnaRadios({
+          label: "Type",
+          headingSize: "s",
+          id: "type",
+          name: "type",
+          items: [
+            {
+              text: "Teaching resources",
+              value: "teaching-resources"
+            },
+            {
+              text: "Education sessions",
+              value: "education-sessions"
+            }
+          ],
+          selected: "teaching-resources",
+          inline: true
+        }) }}
+        -->
         {{ tnaCheckboxes({
           label: "Key stage",
           headingSize: "s",
@@ -81,9 +101,9 @@
               value: "ks5"
             }
           ],
-          inline: true
+          inline: true,
+          formItemClasses: "tna-!--margin-top-s"
         }) }}
-        -->
       </form>
     </div>
   </div>
