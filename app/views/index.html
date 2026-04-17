@@ -1,20 +1,238 @@
-{% extends "layouts/main.html" %}
+{%- extends "nationalarchives/templates/prototype-kit/_base.njk" -%}
 
-{% set pageName="Home" %}
+{%- from "nationalarchives/components/breadcrumbs/macro.njk" import tnaBreadcrumbs -%}
+{%- from "nationalarchives/components/card/macro.njk" import tnaCard -%}
+{%- from "nationalarchives/components/checkboxes/macro.njk" import tnaCheckboxes -%}
+{%- from "nationalarchives/components/hero/macro.njk" import tnaHero -%}
+{%- from "nationalarchives/components/search-field/macro.njk" import tnaSearchField -%}
+
+{% set pageTitle = 'Landing page' %}
+{% set theme = 'system' %}
+{% set themeAccent = 'green' %}
+
+{% block beforeContent %}
+<div class="tna-container">
+  {{ tnaBreadcrumbs({
+    items: [
+      {
+        text: 'Home',
+        href: 'https://www.nationalarchives.gov.uk'
+      }
+    ],
+    classes: 'tna-column tna-column--full tna-!--padding-vertical-s'
+  }) }}
+</div>
+{% endblock beforeContent %}
 
 {% block content %}
-
-<div class="govuk-grid-row">
-  <div class="govuk-grid-column-two-thirds">
-
-    {% include "govuk-prototype-kit/includes/homepage-top.njk" %}
-
-    <h1 class="govuk-heading-xl">
-      {{ serviceName }}
-    </h1>
-
-    {% include "govuk-prototype-kit/includes/homepage-bottom.njk" %}
+{{ tnaHero({
+  title: "Education",
+  body: '<p class="tna-large-paragraph">Online learning resources and taught sessions.</p>',
+  imageSrc: "https://picsum.photos/id/56/1200/480",
+  imageAlt: "A mountain range",
+  imageWidth: 1200,
+  imageHeight: 480,
+  imageSources: {
+    src: "https://picsum.photos/id/56/1200/480",
+    width: 600,
+    height: 400,
+    type: "image/jpeg",
+    media: "(max-width: 48em)"
+  },
+  narrow: true,
+  style: "accent"
+}) }}
+<div class="tna-!--padding-vertical-m tna-background-accent">
+  <div class="tna-container">
+    <div class="tna-column tna-column--full">
+      <form action="/results-all" method="get">
+        {{ tnaSearchField({
+          label: "Search",
+          hint: "Find learning resources and taught sessions",
+          headingLevel: 2,
+          headingSize: "l",
+          id: "search",
+          name: "q"
+        }) }}
+        <!--
+        {{ tnaCheckboxes({
+          label: "Key stage",
+          headingSize: "s",
+          id: "ks",
+          name: "ks",
+          items: [
+            {
+              text: "KS1",
+              value: "ks1"
+            },
+            {
+              text: "KS2",
+              value: "ks2"
+            },
+            {
+              text: "KS3",
+              value: "ks3"
+            },
+            {
+              text: "KS4",
+              value: "ks4"
+            },
+            {
+              text: "KS5",
+              value: "ks5"
+            }
+          ],
+          inline: true
+        }) }}
+        -->
+      </form>
+    </div>
   </div>
 </div>
+<div class="tna-section">
+  <div class="tna-container">
+    <div class="tna-column tna-column--full">
+      <h2 class="tna-heading-l">Popular resources</h2>
+    </div>
+  </div>
+  <ul class="tna-container">
+    {% for i in range(1, 4) -%}
+    <li class="tna-column tna-column--width-1-3 tna-column--width-1-2-medium tna-column--width-1-2-small tna-column--full-tiny tna-!--margin-top-m">
+      {{ tnaCard({
+      supertitle: ["Teaching resource", "Education session"] | random,
+        title: "Card " ~ i,
+        headingLevel: 3,
+        headingSize: "m",
+        href: "#",
+        label: ["New", "", "", "", ""] | random,
+        meta: [
+          {
+            title: "Key stage",
+            text: ["KS1", "KS2", "KS3", "KS4", "KS5"] | random,
+            icon: "graduation-cap"
+          },
+          {
+            title: "Theme",
+            text: ["Power, politics and reform", "War and revolution", "Migration and identity", "Empire and decolonisation", "Crime and punishment", "Medicine, welfare and society", "Family, community and everyday life", "Economy, trade and industry", "Archive skills", "Local history", "Women's history", "Black, Asian and global majority history", "LGBTQ+ history", "Disability history", "Significant people, places and things"] | random,
+            icon: "scroll"
+          },
+          {
+            title: "Time period",
+            text: ["Early civilisations (pre 900)", "Medieval (900-1485)", " Early modern (1485-1750)", "Industrial revolution (1750-1901)", " Early twentieth century (1901-1945)", "Post-war and modern (1945- present)", "Thematic / cross"] | random,
+            icon: "hourglass"
+          }
+        ],
+        imageSrc: "https://placehold.co/600x400/d9d9d6/26262a?text=Image&font=museo&font_size=48",
+        imageAlt: "A random example image",
+        imageWidth: 600,
+        imageHeight: 400,
+        style: "accent",
+        horizontal: true,
+        horizontalSmallImage: true,
+        fullAreaClick: true,
+        classes: "tna-card--full-height"
+      }) }}
+    </li>
+    {% endfor -%}
+  </ul>
+  <div class="tna-container tna-!--margin-top-l">
+    <div class="tna-column tna-column--full">
+      <h2 class="tna-heading-l">
+        <a href="/teaching-resources">Teaching resources</a>
+      </h2>
+    </div>
+  </div>
+  <ul class="tna-container">
+    {% for i in range(1, 4) -%}
+    <li class="tna-column tna-column--width-1-3 tna-column--width-1-2-medium tna-column--width-1-2-small tna-column--full-tiny tna-!--margin-top-m">
+      {{ tnaCard({
+        supertitle: "Teaching resource",
+        title: "Card " ~ i,
+        headingLevel: 3,
+        headingSize: "m",
+        href: "#",
+        label: ["New", "", "", "", ""] | random,
+        meta: [
+          {
+            title: "Key stage",
+            text: ["KS1", "KS2", "KS3", "KS4", "KS5"] | random,
+            icon: "graduation-cap"
+          },
+          {
+            title: "Theme",
+            text: ["Power, politics and reform", "War and revolution", "Migration and identity", "Empire and decolonisation", "Crime and punishment", "Medicine, welfare and society", "Family, community and everyday life", "Economy, trade and industry", "Archive skills", "Local history", "Women's history", "Black, Asian and global majority history", "LGBTQ+ history", "Disability history", "Significant people, places and things"] | random,
+            icon: "scroll"
+          },
+          {
+            title: "Time period",
+            text: ["Early civilisations (pre 900)", "Medieval (900-1485)", " Early modern (1485-1750)", "Industrial revolution (1750-1901)", " Early twentieth century (1901-1945)", "Post-war and modern (1945- present)", "Thematic / cross"] | random,
+            icon: "hourglass"
+          }
+        ],
+        imageSrc: "https://placehold.co/600x400/d9d9d6/26262a?text=Image&font=museo&font_size=48",
+        imageAlt: "A random example image",
+        imageWidth: 600,
+        imageHeight: 400,
+        body: "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vel tincidunt velit, a molestie turpis.</p>",
+        style: "plain",
+        fullAreaClick: true,
+        classes: "tna-card--full-height"
+      }) }}
+    </li>
+    {% endfor -%}
+  </ul>
+  <div class="tna-container tna-!--margin-top-l">
+    <div class="tna-column tna-column--full">
+      <h2 class="tna-heading-l">
+        <a href="/education-sessions">Education sessions</a>
+      </h2>
+    </div>
+  </div>
+  <ul class="tna-container">
+    {% for i in range(1, 4) -%}
+    <li class="tna-column tna-column--width-1-3 tna-column--width-1-2-medium tna-column--width-1-2-small tna-column--full-tiny tna-!--margin-top-m">
+      {{ tnaCard({
+        supertitle: "Education session",
+        title: "Card " ~ i,
+        headingLevel: 3,
+        headingSize: "m",
+        href: "#",
+        label: ["New", "", "", "", ""] | random,
+        meta: [
+          {
+            title: "Key stage",
+            text: ["KS1", "KS2", "KS3", "KS4", "KS5"] | random,
+            icon: "graduation-cap"
+          },
+          {
+            title: "Theme",
+            text: ["Power, politics and reform", "War and revolution", "Migration and identity", "Empire and decolonisation", "Crime and punishment", "Medicine, welfare and society", "Family, community and everyday life", "Economy, trade and industry", "Archive skills", "Local history", "Women's history", "Black, Asian and global majority history", "LGBTQ+ history", "Disability history", "Significant people, places and things"] | random,
+            icon: "scroll"
+          },
+          {
+            title: "Time period",
+            text: ["Early civilisations (pre 900)", "Medieval (900-1485)", " Early modern (1485-1750)", "Industrial revolution (1750-1901)", " Early twentieth century (1901-1945)", "Post-war and modern (1945- present)", "Thematic / cross"] | random,
+            icon: "hourglass"
+          }
+        ],
+        imageSrc: "https://placehold.co/600x400/d9d9d6/26262a?text=Image&font=museo&font_size=48",
+        imageAlt: "A random example image",
+        imageWidth: 600,
+        imageHeight: 400,
+        body: "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vel tincidunt velit, a molestie turpis.</p>",
+        style: "plain",
+        fullAreaClick: true,
+        classes: "tna-card--full-height"
+      }) }}
+    </li>
+    {% endfor -%}
+  </ul>
+</div>
+{% endblock content %}
 
-{% endblock %}
+{% block footer %}
+{{ tnaFooter({
+  themeSelector: true,
+  currentTheme: theme
+}) | indent(4) }}
+{% endblock footer %}

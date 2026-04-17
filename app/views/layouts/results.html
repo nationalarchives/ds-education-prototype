@@ -1,0 +1,320 @@
+{%- extends "nationalarchives/templates/prototype-kit/_base.njk" -%}
+
+{%- from "nationalarchives/components/breadcrumbs/macro.njk" import tnaBreadcrumbs -%}
+{%- from "nationalarchives/components/button/macro.njk" import tnaButton -%}
+{%- from "nationalarchives/components/card/macro.njk" import tnaCard -%}
+{%- from "nationalarchives/components/checkboxes/macro.njk" import tnaCheckboxes -%}
+{%- from "nationalarchives/components/details/macro.njk" import tnaDetails -%}
+{%- from "nationalarchives/components/search-field/macro.njk" import tnaSearchField -%}
+{%- from "nationalarchives/components/secondary-navigation/macro.njk" import tnaSecondaryNavigation -%}
+
+{% set theme = 'system' %}
+{% set themeAccent = 'green' %}
+{% set cardSupertitles = cardSupertitles or [] %}
+
+{% block beforeContent %}
+<div class="tna-container">
+  {{ tnaBreadcrumbs({
+    items: [
+      {
+        text: 'Home',
+        href: 'https://www.nationalarchives.gov.uk'
+      },
+      {
+        text: 'Education',
+        href: '/'
+      }
+    ],
+    classes: 'tna-column tna-column--full tna-!--padding-vertical-s'
+  }) }}
+</div>
+{% endblock beforeContent %}
+
+{% block content %}
+<div class="tna-background-accent tna-!--padding-top-l">
+  <div class="tna-container">
+    <div class="tna-column tna-column--width-2-3 tna-column--width-5-6-medium tna-column--full-small tna-column--full-tiny">
+      <hgroup class="tna-hgroup-xl">
+        <p class="tna-hgroup__supertitle">Education</p>
+        <h1 class="tna-hgroup__title">{{ pageTitle }}</h1>
+      </hgroup>
+      <p class="tna-large-paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+      {{ tnaSecondaryNavigation({
+        title: "Types",
+        headingLevel: 2,
+        items: [
+          {
+            name: "All education resources",
+            href: "/results-all",
+            current: tabPage == '/results-all'
+          },
+          {
+            name: "Teaching resources",
+            href: "/teaching-resources",
+            current: tabPage == '/teaching-resources'
+          },
+          {
+            name: "Education sessions",
+            href: "/education-sessions",
+            current: tabPage == '/education-sessions'
+          }
+        ],
+        noBottomBorder: true,
+        classes: "tna-!--margin-top-m"
+      }) }}
+    </div>
+  </div>
+</div>
+<div class="tna-section tna-container">
+  <div class="tna-column tna-column--full">
+    <form action="/results-all" method="get">
+      {{ tnaSearchField({
+        label: "Search results",
+        hint: "Find learning resources and taught sessions",
+        headingLevel: 2,
+        headingSize: "l",
+        id: "search",
+        name: "q"
+      }) }}
+      <div class="tna-!--margin-top-s tna-background-accent-light">
+      {% call tnaDetails({
+        title: "Filters"
+      }) %}
+        {{ tnaCheckboxes({
+          label: "Key stage",
+          headingSize: "s",
+          id: "ks",
+          name: "ks",
+          items: [
+            {
+              text: "KS1",
+              value: "ks1"
+            },
+            {
+              text: "KS2",
+              value: "ks2"
+            },
+            {
+              text: "KS3",
+              value: "ks3"
+            },
+            {
+              text: "KS4",
+              value: "ks4"
+            },
+            {
+              text: "KS5",
+              value: "ks5"
+            }
+          ],
+          inline: true
+        }) }}
+        {{ tnaCheckboxes({
+          label: "Time periods",
+          headingSize: "s",
+          id: "time-periods",
+          name: "time-periods",
+          items: [
+            {
+              text: "Early civilisations (pre 900)",
+              value: "early-civilisations"
+            },
+            {
+              text: "Medieval (900-1485)",
+              value: "medieval"
+            },
+            {
+              text: " Early modern (1485-1750)",
+              value: "early-modern"
+            },
+            {
+              text: "Industrial revolution (1750-1901)",
+              value: "industrial-revolution"
+            },
+            {
+              text: " Early twentieth century (1901-1945)",
+              value: "early-twentieth-century"
+            },
+            {
+              text: "Post-war and modern (1945- present)",
+              value: "post-war-and-modern"
+            },
+            {
+              text: "Thematic / cross",
+              value: "thematic-cross"
+            }
+          ],
+          inline: true
+        }) }}
+        {{ tnaCheckboxes({
+          label: "Theme",
+          headingSize: "s",
+          id: "theme",
+          name: "theme",
+          items: [
+            {
+              text: "Power, politics and reform",
+              value: "power-politics-reform"
+            },
+            {
+              text: "War and revolution",
+              value: "war-revolution"
+            },
+            {
+              text: "Migration and identity",
+              value: "migration-identity"
+            },
+            {
+              text: "Empire and decolonisation",
+              value: "empire-decolonisation"
+            },
+            {
+              text: "Crime and punishment",
+              value: "crime-punishment"
+            },
+            {
+              text: "Medicine, welfare and society",
+              value: "medicine-welfare-society"
+            },
+            {
+              text: "Family, community and everyday life",
+              value: "family-community-everyday-life"
+            },
+            {
+              text: "Economy, trade and industry",
+              value: "economy-trade-industry"
+            },
+            {
+              text: "Archive skills",
+              value: "archive-skills"
+            },
+            {
+              text: "Local history",
+              value: "local-history"
+            },
+            {
+              text: "Women's history",
+              value: "womens-history"
+            },
+            {
+              text: "Black, Asian and global majority history",
+              value: "black-asian-global-history"
+            },
+            {
+              text: "LGBTQ+ history",
+              value: "lgbtq-history"
+            },
+            {
+              text: "Disability history",
+              value: "disability-history"
+            },
+            {
+              text: "Significant people, places and things",
+              value: "significant-people-places-things"
+            }
+          ],
+          inline: true
+        }) }}
+        <div class="tna-button-group tna-button-group--small tna-!--padding-bottom-s">
+          {{ tnaButton({
+            text: "Apply filters",
+            buttonElement: true,
+            buttonType: "submit"
+          }) }}
+          {{ tnaButton({
+            text: "Clear filters",
+            buttonElement: true,
+            buttonType: "reset",
+            plain: true
+          }) }}
+        </div>
+        {% endcall %}
+      </div>
+    </form>
+    <p>Showing <strong>1-13</strong> of <strong>200</strong> results.</p>
+  </div>
+  <div class="tna-column tna-column--width-2-3 tna-column--width-5-6-medium tna-column--full-small tna-column--full-tiny">
+  </div>
+</div>
+<ul class="tna-container">
+  <li class="tna-column tna-column--full tna-!--margin-bottom-l">
+    {{ tnaCard({
+      supertitle: cardSupertitles | random,
+      title: "Card 1",
+      headingLevel: 3,
+      headingSize: "m",
+      href: "#",
+      label: "Featured",
+      meta: [
+        {
+          title: "Key stage",
+          text: ["KS1", "KS2", "KS3", "KS4", "KS5"] | random,
+          icon: "graduation-cap"
+        },
+        {
+          title: "Theme",
+          text: ["Power, politics and reform", "War and revolution", "Migration and identity", "Empire and decolonisation", "Crime and punishment", "Medicine, welfare and society", "Family, community and everyday life", "Economy, trade and industry", "Archive skills", "Local history", "Women's history", "Black, Asian and global majority history", "LGBTQ+ history", "Disability history", "Significant people, places and things"] | random,
+          icon: "scroll"
+        },
+        {
+          title: "Time period",
+          text: ["Early civilisations (pre 900)", "Medieval (900-1485)", " Early modern (1485-1750)", "Industrial revolution (1750-1901)", " Early twentieth century (1901-1945)", "Post-war and modern (1945- present)", "Thematic / cross"] | random,
+          icon: "hourglass"
+        }
+      ],
+      imageSrc: "https://placehold.co/600x400/d9d9d6/26262a?text=Image&font=museo&font_size=48",
+      imageAlt: "A random example image",
+      imageWidth: 600,
+      imageHeight: 400,
+      body: "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vel tincidunt velit, a molestie turpis.</p>",
+      style: "accent",
+      horizontal: true,
+      fullAreaClick: true
+    }) }}
+  </li>
+  {% for i in range(2, 13) -%}
+  <li class="tna-column tna-column--width-1-3 tna-column--width-1-2-medium tna-column--width-1-2-small tna-column--full-tiny tna-!--margin-bottom-l">
+    {{ tnaCard({
+      supertitle: cardSupertitles | random,
+      title: "Card " ~ i,
+      headingLevel: 3,
+      headingSize: "m",
+      href: "#",
+      label: ["New", "", "", "", ""] | random,
+      meta: [
+        {
+          title: "Key stage",
+          text: ["KS1", "KS2", "KS3", "KS4", "KS5"] | random,
+          icon: "graduation-cap"
+        },
+        {
+          title: "Theme",
+          text: ["Power, politics and reform", "War and revolution", "Migration and identity", "Empire and decolonisation", "Crime and punishment", "Medicine, welfare and society", "Family, community and everyday life", "Economy, trade and industry", "Archive skills", "Local history", "Women's history", "Black, Asian and global majority history", "LGBTQ+ history", "Disability history", "Significant people, places and things"] | random,
+          icon: "scroll"
+        },
+        {
+          title: "Time period",
+          text: ["Early civilisations (pre 900)", "Medieval (900-1485)", " Early modern (1485-1750)", "Industrial revolution (1750-1901)", " Early twentieth century (1901-1945)", "Post-war and modern (1945- present)", "Thematic / cross"] | random,
+          icon: "hourglass"
+        }
+      ],
+      imageSrc: "https://placehold.co/600x400/d9d9d6/26262a?text=Image&font=museo&font_size=48",
+      imageAlt: "A random example image",
+      imageWidth: 600,
+      imageHeight: 400,
+      body: "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vel tincidunt velit, a molestie turpis.</p>",
+      style: "plain",
+      fullAreaClick: true,
+      classes: "tna-card--full-height"
+    }) }}
+  </li>
+  {% endfor -%}
+</ul>
+{% endblock content %}
+
+{% block footer %}
+  {{ tnaFooter({
+    themeSelector: true,
+    currentTheme: theme
+  }) | indent(4) }}
+{% endblock footer %}
